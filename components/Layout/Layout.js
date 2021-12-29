@@ -11,7 +11,7 @@ function Layout({ children }) {
   return (
     <>
       <HeadTags />
-      <Container style={{ paddingTop: "1rem" }} text>
+      <Container fluid style={{ paddingTop: "1rem" }}>
         {children}
       </Container>
     </>

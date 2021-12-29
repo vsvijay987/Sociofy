@@ -11,7 +11,12 @@ const HeadTags = () => (
 
       <link rel="stylesheet" type="text/css" href="/styles.css" />
       <link rel="stylesheet" type="text/css" href="/nprogress.css" />
-      
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;400&display=swap"
+        rel="stylesheet"
+      />
 
       <title>Sociofy</title>
     </Head>

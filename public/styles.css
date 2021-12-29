@@ -11,6 +11,10 @@ body {
   cursor: pointer;
 }
 
+.font-link {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
 .mySpinner {
   border: 5px solid #f3f3f3;
   border-top: 5px solid #16d47b;
