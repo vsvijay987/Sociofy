@@ -8,7 +8,9 @@ import {
   Grid,
   Image,
 } from "semantic-ui-react";
-import Link from 'next/link';
+import Link from "next/link";
+import { loginUser } from "../utils/authUser";
+import cookie from "js-cookie";
 
 const login = () => {
   const [user, setUser] = useState({
@@ -28,19 +30,30 @@ const login = () => {
   };
 
   useEffect(() => {
-    const isUser = Object.values({ email, password }).every(item =>
+    const isUser = Object.values({ email, password }).every((item) =>
       Boolean(item)
     );
     isUser ? setSubmitDisabled(false) : setSubmitDisabled(true);
   }, [user]);
 
-  const handleSubmit = (e) => e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    await loginUser(user, setErrorMsg, setFormLoading);
+  };
   
+  useEffect(() => {
+    document.title = "Welcome Back";
+    const userEmail = cookie.get("userEmail");
+    if (userEmail) setUser((prev) => ({ ...prev, email: userEmail }));
+  }, []);
 
   return (
     <>
-      <div className="font-link" style={{textAlign: 'center', fontSize: '50px', paddingBottom: '20px'}}>
+      <div
+        className="font-link"
+        style={{ textAlign: "center", fontSize: "50px", paddingBottom: "20px" }}
+      >
         <p>Sociofy</p>
       </div>
       <Grid centered>
@@ -64,13 +77,12 @@ const login = () => {
                 <div>
                   <img src="https://res.cloudinary.com/codeamphi/image/upload/v1640798021/sociofy_ylysdp.png" />
                 </div>
-                <div className="font-link" style={{fontSize: '20px'}}>
+                <div className="font-link" style={{ fontSize: "20px" }}>
                   <p>WELCOME BACK</p>
                 </div>
-                <div className="font-link" style={{fontSize: '15px'}}>
+                <div className="font-link" style={{ fontSize: "15px" }}>
                   <p>Login</p>
                 </div>
-                
 
                 <Form.Input
                   required
@@ -100,25 +112,37 @@ const login = () => {
                   type={showPassword ? "text" : "password"}
                   required
                 />
-                
+
                 <Divider hidden />
                 <Button
                   icon="signup"
                   content="Login"
                   type="submit"
-                  style={{backgroundColor: "#B23B79", color: "white"}}
+                  style={{ backgroundColor: "#B23B79", color: "white", fontFamily: 'Josefin Sans' }}
                   disabled={submitDisabled}
                 />
                 <Divider hidden />
-                <div className="font-link" style={{fontSize: '15px'}}><p>Don't remember password ? <Link href="/reset">Forget Password</Link></p></div>
+                <div className="font-link" style={{ fontSize: "15px" }}>
+                  <p>
+                    Don't remember password ?{" "}
+                    <Link href="/reset">Forget Password</Link>
+                  </p>
+                </div>
                 <Divider hidden />
-                <div className="font-link" style={{fontSize: '15px'}}><p>Not a member ? <Link href="/signup">Sign Up here</Link></p></div>
+                <div className="font-link" style={{ fontSize: "15px" }}>
+                  <p>
+                    Not a member ? <Link href="/signup">Sign Up here</Link>
+                  </p>
+                </div>
               </Segment>
             </Form>
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <div className="font-link" style={{textAlign: 'center', fontSize: '50px', padding: '20px'}}>
+      <div
+        className="font-link"
+        style={{ textAlign: "center", fontSize: "50px", padding: "20px" }}
+      >
         <p>Be Social, Go Social</p>
       </div>
     </>

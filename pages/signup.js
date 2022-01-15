@@ -9,6 +9,7 @@ import {
   Image,
 } from "semantic-ui-react";
 import Link from 'next/link';
+import { registerUser } from "../utils/authUser";
 
 const signup = () => {
   const [user, setUser] = useState({
@@ -32,7 +33,11 @@ const signup = () => {
     isUser ? setSubmitDisabled(false) : setSubmitDisabled(true);
   }, [user]);
 
-  const handleSubmit = (e) => e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setFormLoading(true);
+    await registerUser(user, setErrorMsg, setFormLoading);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -128,7 +133,7 @@ const signup = () => {
                   icon="signup"
                   content="Signup"
                   type="submit"
-                  style={{backgroundColor: "#B23B79", color: "white"}}
+                  style={{backgroundColor: "#B23B79", color: "white", fontFamily: 'Josefin Sans'}}
                   disabled={submitDisabled}
                 />
                 <Divider hidden />

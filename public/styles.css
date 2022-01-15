@@ -15,6 +15,15 @@ body {
   font-family: 'Josefin Sans', sans-serif;
 }
 
+.posts-segment{
+  height: 77vh;
+  overflow-y: auto;
+}
+
+.posts-segment::-webkit-scrollbar {
+  display: none;
+}
+
 .mySpinner {
   border: 5px solid #f3f3f3;
   border-top: 5px solid #16d47b;

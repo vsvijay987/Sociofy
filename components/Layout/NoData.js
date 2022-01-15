@@ -2,26 +2,61 @@ import { Message, Button } from "semantic-ui-react";
 
 export const NoProfilePosts = () => (
   <>
-    <Message info icon="meh" header="Sorry" content="User has not posted anything yet!" />
-    <Button icon="long arrow alternate left" content="Go Back" as="a" href="/" />
+    <Message
+      style={{
+        color: "#B23B79",
+        fontFamily: "Josefin Sans",
+        backgroundColor: "#FCFAFA",
+      }}
+      icon="meh"
+      header="Sorry"
+      content="User has not posted anything yet!"
+    />
+    <Button
+      style={{ fontFamily: "Josefin Sans" }}
+      icon="long arrow alternate left"
+      content="Go Back"
+      as="a"
+      href="/"
+    />
   </>
 );
 
 export const NoFollowData = ({ followersComponent, followingComponent }) => (
   <>
     {followersComponent && (
-      <Message icon="user outline" info content="User does not have followers" />
+      <Message
+        style={{
+          color: "#B23B79",
+          fontFamily: "Josefin Sans",
+          backgroundColor: "#FCFAFA",
+        }}
+        icon="user outline"
+        content="User does not have followers"
+      />
     )}
 
     {followingComponent && (
-      <Message icon="user outline" info content="User does not follow any users" />
+      <Message
+        style={{
+          color: "#B23B79",
+          fontFamily: "Josefin Sans",
+          backgroundColor: "#FCFAFA",
+        }}
+        icon="user outline"
+        content="User does not follow any users"
+      />
     )}
   </>
 );
 
 export const NoMessages = () => (
   <Message
-    info
+    style={{
+      color: "#B23B79",
+      fontFamily: "Josefin Sans",
+      backgroundColor: "#FCFAFA",
+    }}
     icon="telegram plane"
     header="Sorry"
     content="You have not messaged anyone yet.Search above to message someone!"
@@ -30,13 +65,39 @@ export const NoMessages = () => (
 
 export const NoPosts = () => (
   <Message
-    info
+    floating
+    style={{
+      color: "#B23B79",
+      fontFamily: "Josefin Sans",
+      backgroundColor: "#FCFAFA",
+    }}
     icon="meh"
     header="Hey!"
     content="No Posts. Make sure you have followed someone."
   />
 );
 
+export const NoNotifications = () => (
+  <Message
+    style={{
+      color: "#B23B79",
+      fontFamily: "Josefin Sans",
+      backgroundColor: "#FCFAFA",
+    }}
+    content="No Notifications"
+    icon="smile"
+  />
+);
+
 export const NoProfile = () => (
-  <Message info icon="meh" header="Hey!" content="No Profile Found." />
+  <Message
+    style={{
+      color: "#B23B79",
+      fontFamily: "Josefin Sans",
+      backgroundColor: "#FCFAFA",
+    }}
+    icon="meh"
+    header="Hey!"
+    content="No Profile Found."
+  />
 );

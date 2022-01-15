@@ -12,11 +12,18 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 nextApp.prepare().then(() => {
-  
-    app.all("*", (req, res) => handle(req, res));
-  
-    server.listen(PORT, (err) => {
-      if (err) throw err;
-      console.log("Express server running");
-    });
+  app.use("/api/signup", require("./api/signup"));
+  app.use("/api/auth", require("./api/auth"));
+  app.use("/api/reset", require("./api/reset"));
+  app.use("/api/search", require("./api/search"));
+  app.use("/api/posts", require("./api/posts"));
+  app.use("/api/profile", require("./api/profile"));
+  app.use("/api/notifications", require("./api/notifications"));
+
+  app.all("*", (req, res) => handle(req, res));
+
+  server.listen(PORT, (err) => {
+    if (err) throw err;
+    console.log("Express server running");
   });
+});
