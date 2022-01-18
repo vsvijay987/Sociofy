@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu } from "semantic-ui-react";
+import { Menu,Grid } from "semantic-ui-react";
 
 const ProfileMenuTabs = ({
   activeItem,
@@ -13,7 +13,7 @@ const ProfileMenuTabs = ({
     <>
       {ownAccount && (
         <>
-          <Menu style={{ justifyContent: "center" }} size="large" secondary>
+        <Menu style={{ justifyContent: "center" }}  secondary>
             <Menu.Item
               name="profile"
               active={activeItem === "profile"}
