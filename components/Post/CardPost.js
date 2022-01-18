@@ -160,12 +160,6 @@ const CardPost = ({ post, user, setPosts, setShowToastr }) => {
               }
             />
 
-            <Icon
-              name="comment outline"
-              style={{ marginLeft: "7px" }}
-              color="blue"
-            />
-
             {comments.length > 0 &&
               comments.map(
                 (comment, i) =>

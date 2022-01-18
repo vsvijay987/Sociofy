@@ -7,6 +7,7 @@ const isEmail = require("validator/lib/isEmail");
 const UserModel = require("../models/UserModel");
 const FollowerModel = require("../models/FollowerModel");
 const NotificationModel = require("../models/NotificationModel");
+const ChatModel = require("../models/ChatModel");
 const userPng =
   "https://res.cloudinary.com/codeamphi/image/upload/v1640847269/profile-placeholder_s1biy6.png";
 
@@ -47,6 +48,7 @@ router.post("/", async (req, res) => {
     }).save();
 
     await new NotificationModel({ user: user._id, notifications: [] }).save();
+    await new ChatModel({user: user._id, chats: []}).save();
 
     const payload = { userId: user._id };
     jwt.sign(
