@@ -18,6 +18,11 @@ const HeadTags = () => (
         rel="stylesheet"
       />
 
+      <link
+        href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Poppins:wght@100&family=Rubik:wght@300&display=swap"
+        rel="stylesheet"
+      />
+
       <title>Sociofy</title>
     </Head>
   </>

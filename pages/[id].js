@@ -43,8 +43,8 @@ const ProfilePage = ({
       setLoading(true);
 
       try {
-        const { email } = router.query;
-        const res = await axios.get(`${baseUrl}/api/profile/posts/${email}`, {
+        const { id } = router.query;
+        const res = await axios.get(`${baseUrl}/api/profile/posts/${id}`, {
           headers: { Authorization: cookie.get("token") },
         });
 
@@ -56,7 +56,7 @@ const ProfilePage = ({
       setLoading(false);
     };
     getPosts();
-  }, [router.query.email]);
+  }, [router.query.id]);
 
   useEffect(() => {
     showToastr && setTimeout(() => setShowToastr(false), 3000);
@@ -140,10 +140,10 @@ const ProfilePage = ({
 
 ProfilePage.getInitialProps = async (ctx) => {
   try {
-    const { email } = ctx.query;
+    const { id } = ctx.query;
     const { token } = parseCookies(ctx);
 
-    const res = await axios.get(`${baseUrl}/api/profile/${email}`, {
+    const res = await axios.get(`${baseUrl}/api/profile/${id}`, {
       headers: { Authorization: token },
     });
 

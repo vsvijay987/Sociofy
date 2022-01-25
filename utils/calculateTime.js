@@ -9,6 +9,9 @@ const calculateTime = (createdAt) => {
   const diffInSeconds = today.diff(postDate, "seconds");
 
   if (diffInSeconds < 60) {
+    if (diffInSeconds == 0) {
+      return <>Just now</>;
+    }
     if (diffInSeconds == 1) {
       return <>{diffInSeconds} second ago</>;
     }

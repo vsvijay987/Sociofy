@@ -33,106 +33,114 @@ const PostPage = ({ post, errorLoading, user }) => {
 
   return (
     <>
-      <Segment className="posts-segment" basic>
-        <Card fluid>
-          {post.picUrl && (
-            <Image
-              src={post.picUrl}
-              style={{ cursor: "pointer" }}
-              floated="left"
-              wrapped
-              ui={false}
-              alt="PostImage"
-              onClick={() => setShowModal(true)}
-            />
-          )}
+      <Segment className="posts-segment" style={{ height: "85vh" }}>
+        <Segment basic>
+          <Card raised fluid>
+            <Card.Content>
+              <Image
+                floated="left"
+                src={post.user.profilePicUrl}
+                avatar
+                circular
+              />
+              <Card.Header style={{ fontFamily: "Josefin Sans" }}>
+                <Link href={`/${post.user._id}`}>
+                  <a>{post.user.name}</a>
+                </Link>
+              </Card.Header>
 
-          <Card.Content>
-            <Image
-              floated="left"
-              src={post.user.profilePicUrl}
-              avatar
-              circular
-            />
-            <Card.Header style={{ fontFamily: "Josefin Sans" }}>
-              <Link href={`/${post.user.email}`}>
-                <a>{post.user.name}</a>
-              </Link>
-            </Card.Header>
+              <Card.Meta className="font-link">
+                {calculateTime(post.createdAt)}
+              </Card.Meta>
 
-            <Card.Meta className="font-link">{calculateTime(post.createdAt)}</Card.Meta>
+              {post.location && (
+                <Card.Meta className="font-link" content={post.location} />
+              )}
 
-            {post.location && <Card.Meta className="font-link" content={post.location} />}
+              <div
+                style={{
+                  fontSize: "17px",
+                  letterSpacing: "0.1px",
+                  wordSpacing: "0.35px",
+                  color: `${post.textColor}`,
+                  paddingLeft: "43px",
+                  paddingTop: "20px",
+                }}
+                className="font-link"
+              >
+                {post.text}
+              </div>
+            </Card.Content>
 
-            <Card.Description
-              style={{
-                fontSize: "17px",
-                letterSpacing: "0.1px",
-                wordSpacing: "0.35px",
-                color: `${post.textColor}`,
-                paddingLeft: '43px',
-                paddingTop: '20px'
-              }}
-              className="font-link"
-            >
-              {post.text}
-            </Card.Description>
-          </Card.Content>
+            {post.picUrl && (
+              <Image
+                src={post.picUrl}
+                style={{ cursor: "pointer" }}
+                floated="left"
+                wrapped
+                ui={false}
+                alt="PostImage"
+                onClick={() => setShowModal(true)}
+              />
+            )}
 
-          <Card.Content extra>
-            <Icon
-              name={isLiked ? "heart" : "heart outline"}
-              color="red"
-              style={{ cursor: "pointer" }}
-              onClick={() =>
-                likePost(post._id, user._id, setLikes, isLiked ? false : true)
-              }
-            />
+            <Card.Content extra>
+              <Icon
+                name={isLiked ? "heart" : "heart outline"}
+                color="red"
+                style={{ cursor: "pointer" }}
+                onClick={() =>
+                  likePost(post._id, user._id, setLikes, isLiked ? false : true)
+                }
+              />
 
-            <LikesList
-              postId={post._id}
-              trigger={
-                likes.length > 0 && (
-                  <span className="font-link">
-                    {`${likes.length} ${likes.length === 1 ? "like" : "likes"}`}
-                  </span>
-                )
-              }
-            />
+              <LikesList
+                postId={post._id}
+                trigger={
+                  likes.length > 0 && (
+                    <span className="font-link">
+                      {`${likes.length} ${
+                        likes.length === 1 ? "like" : "likes"
+                      }`}
+                    </span>
+                  )
+                }
+              />
 
-            <Icon
-              name="comment outline"
-              style={{ marginLeft: "7px" }}
-              color="blue"
-            />
+              <Icon
+                name="comment outline"
+                style={{ marginLeft: "7px" }}
+                color="blue"
+              />
 
-            {comments.length > 0 &&
-              comments.map((comment) => (
-                <PostComments
-                  key={comment._id}
-                  comment={comment}
-                  postId={post._id}
-                  user={user}
-                  setComments={setComments}
-                />
-              ))}
+              {comments.length > 0 &&
+                comments.map((comment) => (
+                  <PostComments
+                    key={comment._id}
+                    comment={comment}
+                    postId={post._id}
+                    user={user}
+                    setComments={setComments}
+                  />
+                ))}
 
-            <Divider hidden />
+              <Divider hidden />
 
-            <CommentInputField
-              user={user}
-              postId={post._id}
-              setComments={setComments}
-            />
-          </Card.Content>
-        </Card>
+              <CommentInputField
+                user={user}
+                postId={post._id}
+                setComments={setComments}
+              />
+            </Card.Content>
+          </Card>
+        </Segment>
+        <Divider hidden />
       </Segment>
-      <Divider hidden />
     </>
   );
 };
 
-PostPage.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   try {
     const { postId } = ctx.query;
     const { token } = parseCookies(ctx);
@@ -140,10 +148,9 @@ PostPage.getInitialProps = async (ctx) => {
     const res = await axios.get(`${baseUrl}/api/posts/${postId}`, {
       headers: { Authorization: token },
     });
-
-    return { post: res.data };
+    return { props: { post: res.data } };
   } catch (error) {
-    return { errorLoading: true };
+    return { props: { errorLoading: true } };
   }
 };
 

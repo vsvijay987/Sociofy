@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { List, Icon, Image, Divider } from "semantic-ui-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -7,7 +7,7 @@ const LeftSideMenu = ({
   user: {
     unreadNotification,
     name,
-    email,
+    _id,
     unreadMessage,
     profession,
     location,
@@ -39,23 +39,19 @@ const LeftSideMenu = ({
           <br />
           {profession && (
             <List.Content style={{ textAlign: "center" }}>
-              {
-                <List.Description
-                  style={{ fontFamily: "Josefin Sans", fontSize: "1rem" }}
-                  content={profession}
-                />
-              }
+              <div style={{ fontFamily: "Dongle", fontSize: "20px" }}>
+                <Icon name="briefcase" size="small" />
+                {profession}
+              </div>
             </List.Content>
           )}
 
           {location && (
             <List.Content style={{ textAlign: "center" }}>
-              {
-                <List.Description
-                  style={{ fontFamily: "Josefin Sans", fontSize: "1rem" }}
-                  content={location}
-                />
-              }
+              <div style={{ fontFamily: "Dongle", fontSize: "20px" }}>
+                <Icon name="map marker alternate" size="small" />
+                {location}
+              </div>
             </List.Content>
           )}
         </List.Item>
@@ -80,9 +76,36 @@ const LeftSideMenu = ({
         <br />
 
         <Link href="/messages">
-          <List.Item active={isActive("/messages")}>
+          <List.Item active={isActive("/messages")} style={{
+              position: "relative",
+              display: "block",
+            }}>
+              {unreadMessage && (
+              <span
+                style={{
+                  position: "absolute",
+                  padding: "20px",
+
+                  width: "30px",
+                  textAlign: "center",
+
+                  margin: "2px 2px",
+                  borderRadius: "50%",
+                  height: "20px",
+                  width: "20px",
+                  fontSize: "12px",
+                  padding: "2px",
+                  left: "22px",
+                  top: "2px",
+                  backgroundColor: "#B23B79",
+                  color: "white",
+                }}
+              >
+                
+              </span>
+            )}
             <Icon
-              name={unreadMessage ? "hand point right" : "mail outline"}
+              name="mail outline"
               size="large"
               style={{
                 color:
@@ -102,13 +125,44 @@ const LeftSideMenu = ({
         </Link>
         <br />
         <Link href="/notifications">
-          <List.Item active={isActive("/notifications")}>
+          <List.Item
+            active={isActive("/notifications")}
+            style={{
+              position: "relative",
+              display: "block",
+            }}
+          >
+            {unreadNotification && (
+              <span
+                style={{
+                  position: "absolute",
+                  padding: "20px",
+
+                  width: "30px",
+                  textAlign: "center",
+
+                  margin: "2px 2px",
+                  borderRadius: "50%",
+                  height: "20px",
+                  width: "20px",
+                  fontSize: "12px",
+                  padding: "2px",
+                  left: "22px",
+                  top: "2px",
+                  backgroundColor: "#B23B79",
+                  color: "white",
+                }}
+              >
+                
+              </span>
+            )}
+
             <Icon
-              name={unreadNotification ? "hand point right" : "bell outline"}
+              name="bell outline"
               size="large"
               style={{
                 color:
-                  (unreadNotification && "orange") ||
+
                   (isActive("/notifications") ? "#B23B79" : "black"),
               }}
             />
@@ -125,20 +179,20 @@ const LeftSideMenu = ({
           </List.Item>
         </Link>
         <br />
-        <Link href={`/${email}`}>
-          <List.Item active={router.query.email === email}>
+        <Link href={`/${_id}`}>
+          <List.Item active={router.query.id === _id}>
             <Icon
               name="user"
               size="large"
               style={{
-                color: router.query.email === email ? "#B23B79" : "black",
+                color: router.query.id === _id ? "#B23B79" : "black",
               }}
             />
             <List.Content>
               {pc &&
                 <List.Header
                   style={{
-                    color: router.query.email === email ? "#B23B79" : "black",
+                    color: router.query.id === _id ? "#B23B79" : "black",
                   }}
                   content="Account"
                 />

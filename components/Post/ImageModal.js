@@ -31,7 +31,7 @@ const ImageModal = ({
               <Image floated="left" avatar src={post.user.profilePicUrl} />
 
               <Card.Header className="font-link">
-                <Link href={`/${post.user.username}`}>
+                <Link href={`/${post.user._id}`}>
                   <a>{post.user.name}</a>
                 </Link>
               </Card.Header>

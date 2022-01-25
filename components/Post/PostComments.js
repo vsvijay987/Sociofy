@@ -13,8 +13,8 @@ const PostComments = ({ comment, user, setComments, postId }) => {
           <Comment.Content>
             <Comment.Author
               as="a"
-              href={`/${comment.user.email}`}
-              className="font-link"
+              href={`/${comment.user._id}`}
+              className="name-font"
             >
               {comment.user.name}
             </Comment.Author>
@@ -27,19 +27,18 @@ const PostComments = ({ comment, user, setComments, postId }) => {
             <Comment.Actions>
               <Comment.Action>
                 {comment.user._id === user._id && (
-                  <Button
+                  <p
                     disabled={disabled}
-                    size="mini"
                     onClick={async () => {
                       setDisabled(true);
                       await deleteComment(postId, comment._id, setComments);
                       setDisabled(false);
                     }}
                     basic
-                    color="red"
+                    style={{color: 'red', fontSize: '10px', textDecoration: 'underline'}}
                   >
-                    Delete comment
-                  </Button>
+                    Delete
+                  </p>
                 )}
               </Comment.Action>
             </Comment.Actions>

@@ -9,13 +9,14 @@ const {
   newFollowerNotification,
   removeFollowerNotification,
 } = require("../utilsServer/notificationActions");
+const { isValidObjectId } = require("mongoose");
 
 // GET PROFILE INFO
-router.get("/:email", authMiddleware, async (req, res) => {
+router.get("/:id", authMiddleware, async (req, res) => {
   try {
-    const { email } = req.params;
+    const { id } = req.params;
 
-    const userProfile = await UserModel.findOne({ email: email.toLowerCase() });
+    const userProfile = await UserModel.findOne({ _id: id });
     if (!userProfile) {
       return res.status(404).send("No User Found");
     }
@@ -42,11 +43,11 @@ router.get("/:email", authMiddleware, async (req, res) => {
 });
 
 // GET POSTS OF USER
-router.get(`/posts/:email`, authMiddleware, async (req, res) => {
+router.get(`/posts/:id`, authMiddleware, async (req, res) => {
   try {
-    const { email } = req.params;
+    const { id } = req.params;
 
-    const user = await UserModel.findOne({ email: email.toLowerCase() });
+    const user = await UserModel.findOne({ _id: id });
     if (!user) {
       return res.status(404).send("No User Found");
     }

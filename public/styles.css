@@ -15,7 +15,15 @@ body {
   font-family: 'Josefin Sans', sans-serif;
 }
 
-.posts-segment{
+.name-font {
+  font-family: 'Rubik', sans-serif;
+}
+
+.post-font {
+  font-family: 'Dongle', sans-serif;
+}
+
+.posts-segment {
   height: 77vh;
   overflow-y: auto;
 }
@@ -33,10 +41,12 @@ body {
   animation: spin 0.8s linear infinite;
   margin: auto;
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

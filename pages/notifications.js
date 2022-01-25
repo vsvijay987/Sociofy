@@ -38,7 +38,7 @@ const Notifications = ({
     <>
       <div>
         {notifications.length > 0 ? (
-          <Segment className="posts-segment" style={{height: "82vh"}} raised>
+          <Segment className="posts-segment" style={{ height: "82vh" }} raised>
             <Feed size="small">
               {notifications.map((notification) => (
                 <>
@@ -79,17 +79,16 @@ const Notifications = ({
   );
 };
 
-Notifications.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   try {
     const { token } = parseCookies(ctx);
 
     const res = await axios.get(`${baseUrl}/api/notifications`, {
       headers: { Authorization: token },
     });
-
-    return { notifications: res.data };
+    return { props: { notifications: res.data } };
   } catch (error) {
-    return { errorLoading: true };
+    return { props: { errorLoading: true } };
   }
 };
 

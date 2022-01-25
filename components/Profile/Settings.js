@@ -43,7 +43,7 @@ const Settings = ({ newMessagePopup }) => {
           <List.Icon name="user secret" size="large" verticalAlign="middle" />
           <List.Content>
             <List.Header
-              style={{ fontFamily: "Josefin Sans" }}
+              style={{ fontFamily: "Rubik" }}
               onClick={() => showPasswordFields(!passwordFields)}
               as="a"
               content="Update Password"
@@ -69,7 +69,7 @@ const Settings = ({ newMessagePopup }) => {
           <List.Content>
             <List.Header
               onClick={() => showNewMessageSettings(!newMessageSettings)}
-              style={{ fontFamily: "Josefin Sans" }}
+              style={{ fontFamily: "Rubik" }}
               as="a"
               content="Show New Message Popup?"
             />
@@ -77,11 +77,11 @@ const Settings = ({ newMessagePopup }) => {
 
           {newMessageSettings && (
             <div style={{ marginTop: "10px" }}>
-              <p className="font-link">
+              <p className="name-font">
                 Control whether a Popup should appear when there is a New
                 Message
               </p>
-              <p className="font-link">or not.</p>
+              <p className="name-font">or not.</p>
               <br />
               <br />
               <Checkbox

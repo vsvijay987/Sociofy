@@ -85,7 +85,7 @@ const Following = ({
                 <Image avatar src={profileFollowing.user.profilePicUrl} />
                 <List.Content
                   as="a"
-                  href={`/${profileFollowing.user.email}`}
+                  href={`/${profileFollowing.user._id}`}
                   style={{ fontFamily: "Josefin Sans" }}
                 >
                   {profileFollowing.user.name}

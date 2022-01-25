@@ -8,7 +8,7 @@ import {
   Divider,
   Button,
 } from "semantic-ui-react";
-// import CropImageModal from "../Post/CropImageModal";
+import CropImageModal from "../Post/CropImageModal";
 
 function ImageDropDiv({
   highlighted,
@@ -24,7 +24,7 @@ function ImageDropDiv({
 
   return (
     <>
-      {/* {showModal && (
+      {showModal && (
         <CropImageModal
           mediaPreview={mediaPreview}
           setMediaPreview={setMediaPreview}
@@ -32,7 +32,7 @@ function ImageDropDiv({
           showModal={showModal}
           setShowModal={setShowModal}
         />
-      )} */}
+      )}
       <Form.Field>
         <Segment placeholder basic secondary>
           <input
@@ -71,7 +71,7 @@ function ImageDropDiv({
                       alt="Profile pic"
                       style={{ cursor: "pointer" }}
                       onClick={() => inputRef.current.click()}
-                      size="huge"
+                      size="small"
                       centered
                     />
                     <p className="font-link">
@@ -91,7 +91,7 @@ function ImageDropDiv({
                 />
               </Segment>
             )}
-            {/* {mediaPreview !== null && (
+            {mediaPreview !== null && (
               <>
                 <Divider hidden />
 
@@ -103,7 +103,7 @@ function ImageDropDiv({
                   onClick={() => setShowModal(true)}
                 />
               </>
-            )} */}
+            )}
           </div>
         </Segment>
       </Form.Field>
