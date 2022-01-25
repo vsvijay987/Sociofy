@@ -15,6 +15,8 @@ const ChatListSearch = ({ chats, setChats }) => {
   const handleChange = async (e) => {
     const { value } = e.target;
     setText(value);
+    if (value.length === 0) return;
+    if (value.trim().length === 0) return;
     setLoading(true);
 
     try {
@@ -29,7 +31,11 @@ const ChatListSearch = ({ chats, setChats }) => {
         }),
       });
 
-      if (res.data.length === 0) return setLoading(false);
+      if (res.data.length === 0) {
+        results.length > 0 && setResults([]);
+
+        return setLoading(false);
+      }
 
       setResults(res.data);
     } catch (error) {
@@ -83,10 +89,36 @@ const ChatListSearch = ({ chats, setChats }) => {
 
 const ResultRenderer = ({ _id, profilePicUrl, name }) => {
   return (
-    <List key={_id}>
-      <List.Item>
-        <Image src={profilePicUrl} alt="ProfilePic" avatar />
-        <List.Content header={name} as="a" />
+    <List
+      key={_id}
+      vertical
+      style={{ display: "flex", justifyContent: "space-between" }}
+    >
+      <List.Item
+        style={{
+          alignItems: "center",
+        }}
+      >
+        <List.Content verticalAlign="middle">
+          <List.Header> {name} </List.Header>
+        </List.Content>
+      </List.Item>
+      <List.Item
+        style={{
+          alignItems: "center",
+        }}
+      >
+        <List.Content verticalAlign="middle">
+          <img
+            src={profilePicUrl}
+            style={{
+              borderRadius: "50%",
+              height: "40px",
+              width: "40px",
+              ObjectFit: "cover",
+            }}
+          />
+        </List.Content>
       </List.Item>
     </List>
   );

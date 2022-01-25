@@ -6,9 +6,10 @@ import cookie from "js-cookie";
 
 export const registerUser = async (user, setError, setLoading) => {
   try {
-    const res = await axios.post(`${baseUrl}/api/signup`, { user });
+    await axios.post(`${baseUrl}/api/signup`, { user });
 
-    setToken(res.data);
+    // setToken(res.data);
+    Router.push("/login");
   } catch (error) {
     const errorMsg = catchErrors(error);
     setError(errorMsg);
@@ -37,7 +38,7 @@ export const redirectUser = (ctx, location) => {
     Router.push(location);
   }
 };
-export const logoutUser = email => {
+export const logoutUser = (email) => {
   cookie.set("userEmail", email);
   cookie.remove("token");
   Router.push("/login");

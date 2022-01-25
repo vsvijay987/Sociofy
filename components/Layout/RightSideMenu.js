@@ -14,14 +14,15 @@ const RightSideMenu = () => {
       setNews(res.data.articles);
     })();
   }, []);
-  console.log(news);
 
   return (
     <div className="posts-segment" style={{ height: "82vh" }}>
       {news.length > 0 ? (
         news.map((article) => (
           <Card fluid>
-            {article.urlToImage && <Image src={article.urlToImage} wrapped ui={false} />}
+            {article.urlToImage && (
+              <Image src={article.urlToImage} wrapped ui={false} />
+            )}
             <Card.Content>
               <Card.Meta>
                 <span className="font-link">
@@ -29,7 +30,7 @@ const RightSideMenu = () => {
                 </span>
               </Card.Meta>
               <Card.Description className="font-link">
-                {article.description ? article.description  : article.title}
+                {article.description ? article.description : article.title}
               </Card.Description>
             </Card.Content>
             <Card.Content className="font-link" extra>

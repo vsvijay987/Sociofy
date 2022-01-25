@@ -5,15 +5,14 @@ import SearchField from "./SearchField";
 
 function Navbar({ user: { email } }) {
   return (
-    <Menu secondary>
-      <Menu.Item style={{marginLeft: "40px"}}>
+    <Menu secondary style={{ boxShadow: "0 1px 1px rgb(0 0 0 / 0.2)" }}>
+      <Menu.Item style={{ marginLeft: "40px" }}>
         <a href="./">
-        <Image
-          src="https://res.cloudinary.com/codeamphi/image/upload/v1640798021/sociofy_ylysdp.png"
-          size="tiny"
-        />
+          <Image
+            src="https://res.cloudinary.com/codeamphi/image/upload/v1640798021/sociofy_ylysdp.png"
+            size="tiny"
+          />
         </a>
-        
       </Menu.Item>
 
       <Menu.Menu position="right">

@@ -44,7 +44,7 @@ const PostPage = ({ post, errorLoading, user }) => {
                 circular
               />
               <Card.Header style={{ fontFamily: "Josefin Sans" }}>
-                <Link href={`/${post.user.email}`}>
+                <Link href={`/${post.user._id}`}>
                   <a>{post.user.name}</a>
                 </Link>
               </Card.Header>
@@ -140,7 +140,7 @@ const PostPage = ({ post, errorLoading, user }) => {
   );
 };
 
-PostPage.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   try {
     const { postId } = ctx.query;
     const { token } = parseCookies(ctx);
@@ -148,10 +148,9 @@ PostPage.getInitialProps = async (ctx) => {
     const res = await axios.get(`${baseUrl}/api/posts/${postId}`, {
       headers: { Authorization: token },
     });
-
-    return { post: res.data };
+    return { props: { post: res.data } };
   } catch (error) {
-    return { errorLoading: true };
+    return { props: { errorLoading: true } };
   }
 };
 

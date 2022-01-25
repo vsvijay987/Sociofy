@@ -31,7 +31,7 @@ const FollowerNotification = ({
             </>
           </Feed.Summary>
 
-          <div style={{ position: "absolute", right: "5px" }}>
+          <div style={{ position: "absolute", right: "5px"}}>
             <Button
               size="small"
               compact

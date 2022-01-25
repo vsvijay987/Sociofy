@@ -22,6 +22,7 @@ const {
   setMsgToUnread,
   deleteMsg,
 } = require("./utilsServer/messageActions");
+const { likeOrUnlikePost } = require("./utilsServer/likeOrUnlikePost");
 
 io.on("connection", (socket) => {
   socket.on("join", async ({ userId }) => {
@@ -36,7 +37,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("likePost", async ({ postId, userId, like }) => {
-    const { success, name, profilePicUrl, username, postByUserId, error } =
+    const { success, name, profilePicUrl, _id, postByUserId, error } =
       await likeOrUnlikePost(postId, userId, like);
 
     if (success) {
@@ -49,7 +50,7 @@ io.on("connection", (socket) => {
           io.to(receiverSocket.socketId).emit("newNotificationReceived", {
             name,
             profilePicUrl,
-            username,
+            _id,
             postId,
           });
         }

@@ -10,7 +10,7 @@ const CommentNotification = ({ notification }) => {
         <Feed.Content>
           <Feed.Summary>
             <>
-              <Feed.User as="a" href={`/${notification.user.email}`}>
+              <Feed.User as="a" href={`/${notification.user._id}`}>
                 {notification.user.name}
               </Feed.User>{" "}
               commented on your{" "}

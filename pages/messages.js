@@ -251,7 +251,7 @@ function Messages({ chatsData, user }) {
                 </Grid.Column>
               </Grid.Row>
 
-              <Divider/>
+              <Divider />
 
               <Grid.Row>
                 <Grid.Column>
@@ -299,7 +299,7 @@ function Messages({ chatsData, user }) {
   );
 }
 
-Messages.getInitialProps = async (ctx) => {
+export const getServerSideProps = async (ctx) => {
   try {
     const { token } = parseCookies(ctx);
 
@@ -307,9 +307,9 @@ Messages.getInitialProps = async (ctx) => {
       headers: { Authorization: token },
     });
 
-    return { chatsData: res.data };
+    return { props: { chatsData: res.data } };
   } catch (error) {
-    return { errorLoading: true };
+    return { props: { errorLoading: true } };
   }
 };
 

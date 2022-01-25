@@ -19,7 +19,7 @@ import LikesList from "./LikesList";
 import ImageModal from "./ImageModal";
 import NoImageModal from "./NoImageModal";
 
-const CardPost = ({ post, user, setPosts, setShowToastr }) => {
+const CardPost = ({ post, user, setPosts, setShowToastr, socket }) => {
   const [likes, setLikes] = useState(post.likes);
 
   const isLiked =
@@ -75,10 +75,9 @@ const CardPost = ({ post, user, setPosts, setShowToastr }) => {
                   on="click"
                   position="top right"
                   trigger={
-                    
                     <Image
                       src="/deleteIcon.svg"
-                      style={{ cursor: "pointer", color: "#B23B79"}}
+                      style={{ cursor: "pointer", color: "#B23B79" }}
                       size="mini"
                       floated="right"
                     />
@@ -99,8 +98,8 @@ const CardPost = ({ post, user, setPosts, setShowToastr }) => {
               </>
             )}
 
-            <Card.Header style={{ fontFamily: "Josefin Sans" }}>
-              <Link href={`/${post.user.email}`}>
+            <Card.Header style={{ fontFamily: "Rubik" }}>
+              <Link href={`/${post.user._id}`}>
                 <a>{post.user.name}</a>
               </Link>
             </Card.Header>
@@ -115,14 +114,12 @@ const CardPost = ({ post, user, setPosts, setShowToastr }) => {
 
             <div
               style={{
-                fontSize: "17px",
-                letterSpacing: "0.1px",
-                wordSpacing: "0.35px",
+                fontSize: "24px",
                 color: `${post.textColor}`,
-                paddingLeft: '43px',
-                paddingTop: '20px'
+                paddingLeft: "43px",
+                paddingTop: "13px",
               }}
-              className="font-link"
+              className="post-font"
             >
               {post.text}
             </div>
@@ -142,11 +139,34 @@ const CardPost = ({ post, user, setPosts, setShowToastr }) => {
           <Card.Content extra>
             <Icon
               name={isLiked ? "heart" : "heart outline"}
-              color="red"
-              style={{ cursor: "pointer" }}
-              onClick={() =>
-                likePost(post._id, user._id, setLikes, isLiked ? false : true)
-              }
+              
+              style={{ cursor: "pointer", color:"#B23B79" }}
+              onClick={() => {
+                if (socket && socket.current) {
+                  socket.current.emit("likePost", {
+                    postId: post._id,
+                    userId: user._id,
+                    like: isLiked ? false : true,
+                  });
+
+                  socket.current.on("postLiked", () => {
+                    if (isLiked) {
+                      setLikes((prev) =>
+                        prev.filter((like) => like.user !== user._id)
+                      );
+                    } else {
+                      setLikes((prev) => [...prev, { user: user._id }]);
+                    }
+                  });
+                } else {
+                  likePost(
+                    post._id,
+                    user._id,
+                    setLikes,
+                    isLiked ? false : true
+                  );
+                }
+              }}
             />
 
             <LikesList

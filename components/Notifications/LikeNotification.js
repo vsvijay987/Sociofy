@@ -10,7 +10,7 @@ const LikeNotification = ({ notification }) => {
         <Feed.Content>
           <Feed.Summary>
             <>
-              <Feed.User as="a" href={`/${notification.user.email}`}>
+              <Feed.User as="a" href={`/${notification.user._id}`}>
                 {notification.user.name}
               </Feed.User>{" "}
               liked your <a href={`/post/${notification.post._id}`}>post.</a>

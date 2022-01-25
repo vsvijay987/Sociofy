@@ -13,8 +13,8 @@ const PostComments = ({ comment, user, setComments, postId }) => {
           <Comment.Content>
             <Comment.Author
               as="a"
-              href={`/${comment.user.email}`}
-              className="font-link"
+              href={`/${comment.user._id}`}
+              className="name-font"
             >
               {comment.user.name}
             </Comment.Author>

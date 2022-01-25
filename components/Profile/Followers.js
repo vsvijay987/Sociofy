@@ -56,7 +56,7 @@ const Followers = ({
                 <List.Content floated="right">
                   {profileFollower.user._id !== user._id && (
                     <Button
-                    style={{ fontFamily: "Josefin Sans" }}
+                      style={{ fontFamily: "Josefin Sans" }}
                       color={isFollowing ? "instagram" : "twitter"}
                       icon={isFollowing ? "check" : "add user"}
                       content={isFollowing ? "Following" : "Follow"}
@@ -80,7 +80,11 @@ const Followers = ({
                   )}
                 </List.Content>
                 <Image avatar src={profileFollower.user.profilePicUrl} />
-                <List.Content as="a" href={`/${profileFollower.user.email}`} style={{ fontFamily: "Josefin Sans" }}>
+                <List.Content
+                  as="a"
+                  href={`/${profileFollower.user._id}`}
+                  style={{ fontFamily: "Josefin Sans" }}
+                >
                   {profileFollower.user.name}
                 </List.Content>
               </List.Item>

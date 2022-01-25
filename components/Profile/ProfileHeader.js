@@ -39,7 +39,7 @@ const ProfileHeader = ({
 
             {userProfile.profession && (
               <Grid.Row stretched>
-                <p className="font-link">{userProfile.profession}</p>
+                <p style={{fontSize: "20px"}} className="post-font">{userProfile.profession}</p>
 
               </Grid.Row>
             )}
@@ -50,7 +50,7 @@ const ProfileHeader = ({
                 <List.Item>
                   {/* <List.Icon name="pin" style={{ color: "#B23B79" }} /> */}
                   <List.Content
-                    style={{ fontFamily: "Josefin Sans" }}
+                    style={{ fontFamily: "Dongle", fontSize: "20px" }}
                     content={userProfile.location}
                   />
                 </List.Item>

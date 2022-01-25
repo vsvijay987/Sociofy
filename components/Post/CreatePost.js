@@ -11,6 +11,7 @@ import {
 import uploadPic from "../../utils/uploadPicToCloudinary";
 import { submitNewPost } from "../../utils/postActions";
 import ColorPicker from "./ColorPicker";
+import CropImageModal from "./CropImageModal";
 
 function CreatePost({ user, setPosts, trigger }) {
   const [newPost, setNewPost] = useState({ text: "", location: "" });
@@ -84,6 +85,15 @@ function CreatePost({ user, setPosts, trigger }) {
 
   return (
     <>
+      {showModal && (
+        <CropImageModal
+          mediaPreview={mediaPreview}
+          setMediaPreview={setMediaPreview}
+          setMedia={setMedia}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
+      )}
       <Modal
         onClose={() => setOpenCreateModal(false)}
         onOpen={() => setOpenCreateModal(true)}
@@ -189,6 +199,19 @@ function CreatePost({ user, setPosts, trigger }) {
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
+          {mediaPreview !== null && (
+            <>
+              <Divider hidden />
+
+              <Button
+                content="Crop Image"
+                type="button"
+                primary
+                circular
+                onClick={() => setShowModal(true)}
+              />
+            </>
+          )}
           <Button
             circular
             disabled={newPost.text === "" || loading}

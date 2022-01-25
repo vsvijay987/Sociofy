@@ -91,7 +91,6 @@ const UpdateProfile = ({ UserProfile }) => {
             placeholder="Name"
           />
           <Form.Field
-            required
             control={Input}
             name="profession"
             value={profile.profession}
@@ -99,7 +98,6 @@ const UpdateProfile = ({ UserProfile }) => {
             placeholder="Profession"
           />
           <Form.Field
-            required
             control={Input}
             name="location"
             value={profile.location}
@@ -155,7 +153,11 @@ const UpdateProfile = ({ UserProfile }) => {
 
         <Button
           icon="pencil alternate"
-          style={{ backgroundColor: "#B23B79", color: "white", fontFamily: 'Josefin Sans' }}
+          style={{
+            backgroundColor: "#B23B79",
+            color: "white",
+            fontFamily: "Josefin Sans",
+          }}
           disabled={profile.name === "" || loading}
           content="Submit"
           type="submit"

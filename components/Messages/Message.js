@@ -18,7 +18,7 @@ const Message = ({ message, user, deleteMsg, bannerProfilePic, divRef }) => {
           src={ifYouSender ? user.profilePicUrl : bannerProfilePic}
         />
 
-        <div className={ifYouSender ? "ownBubble own font-link" : "otherBubble other font-link"}>
+        <div className={ifYouSender ? "ownBubble own name-font" : "otherBubble other name-font"}>
           {message.msg}
         </div>
 
@@ -33,7 +33,7 @@ const Message = ({ message, user, deleteMsg, bannerProfilePic, divRef }) => {
               />
             }
             content="This will only delete the message from your inbox!"
-            style={{fontFamily: "Josefin Sans"}}
+            style={{fontFamily: "Dongle"}}
             position="top right"
           />
         )}

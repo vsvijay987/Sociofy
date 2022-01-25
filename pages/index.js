@@ -4,7 +4,7 @@ import axios from "axios";
 import baseUrl from "../utils/baseUrl";
 import CreatePost from "../components/Post/CreatePost";
 import CardPost from "../components/Post/CardPost";
-import { Segment, Button, Divider, Card } from "semantic-ui-react";
+import { Segment, Button, Divider } from "semantic-ui-react";
 import { parseCookies } from "nookies";
 import { NoPosts } from "../components/Layout/NoData";
 import { PostDeleteToastr } from "../components/Layout/Toastr";
@@ -17,6 +17,7 @@ import cookie from "js-cookie";
 import getUserInfo from "../utils/getUserInfo";
 import MessageNotificationModal from "../components/Home/MessageNotificationModal";
 import newMsgSound from "../utils/newMsgSound";
+import NotificationPortal from '../components/Home/NotificationPortal';
 
 const Index = ({ user, postsData, errorLoading }) => {
   const [posts, setPosts] = useState(postsData || []);
@@ -28,6 +29,9 @@ const Index = ({ user, postsData, errorLoading }) => {
 
   const [newMessageReceived, setNewMessageReceived] = useState(null);
   const [newMessageModal, showNewMessageModal] = useState(false);
+
+  const [newNotification, setNewNotification] = useState(null);
+  const [notificationPopup, showNotificationPopup] = useState(false);
 
   useEffect(() => {
     if (!socket.current) {
@@ -52,13 +56,24 @@ const Index = ({ user, postsData, errorLoading }) => {
       });
     }
     document.title = `Welcome, ${user.name.split(" ")[0]}`;
-
-    
   }, []);
 
   useEffect(() => {
     showToastr && setTimeout(() => setShowToastr(false), 3000);
   }, [showToastr]);
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on(
+        "newNotificationReceived",
+        ({ name, profilePicUrl, _id, postId }) => {
+          setNewNotification({ name, profilePicUrl, _id, postId });
+
+          showNotificationPopup(true);
+        }
+      );
+    }
+  }, []);
 
   const fetchDataOnScroll = async () => {
     try {
@@ -80,6 +95,13 @@ const Index = ({ user, postsData, errorLoading }) => {
 
   return (
     <>
+      {notificationPopup && newNotification !== null && (
+        <NotificationPortal
+          newNotification={newNotification}
+          notificationPopup={notificationPopup}
+          showNotificationPopup={showNotificationPopup}
+        />
+      )}
       {showToastr && <PostDeleteToastr />}
 
       {newMessageModal && newMessageReceived !== null && (
@@ -121,6 +143,7 @@ const Index = ({ user, postsData, errorLoading }) => {
             >
               {posts.map((post) => (
                 <CardPost
+                  socket={socket}
                   key={post._id}
                   post={post}
                   user={user}
@@ -136,18 +159,18 @@ const Index = ({ user, postsData, errorLoading }) => {
   );
 };
 
-Index.getInitialProps = async (ctx) => {
+export const getServerSideProps = async ctx => {
   try {
     const { token } = parseCookies(ctx);
-
+ 
     const res = await axios.get(`${baseUrl}/api/posts`, {
       headers: { Authorization: token },
-      params: { pageNumber: 1 },
+      params: { pageNumber: 1 }
     });
-
-    return { postsData: res.data };
+ 
+    return { props: { postsData: res.data } }; 
   } catch (error) {
-    return { errorLoading: true };
+    return { props: { errorLoading: true } };
   }
 };
 

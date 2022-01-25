@@ -15,7 +15,7 @@ const SearchField = () => {
   const handleChange = async (e) => {
     const { value } = e.target;
     setText(value);
-    if (value.length === 0) return ;
+    if (value.length === 0) return;
     if (value.trim().length === 0) return;
 
     setLoading(true);
@@ -63,23 +63,33 @@ const SearchField = () => {
       results={results}
       onSearchChange={handleChange}
       minCharacters={1}
-      onResultSelect={(e, data) => Router.push(`/${data.result.email}`)}
+      onResultSelect={(e, data) => Router.push(`/${data.result._id}`)}
     />
   );
 };
 
-const ResultRenderer = ({ _id, profilePicUrl, name, profession }) => {
+const ResultRenderer = ({profilePicUrl, name }) => {
   return (
-    <List vertical>
-    <List.Item>
-      <Image avatar src={profilePicUrl} />
-      <List.Content>
-        <List.Header>{name}</List.Header>
-        {profession && profession}
-      </List.Content>
-    </List.Item>
-    
-  </List>
+    <>
+      <List vertical style={{ display: "flex", justifyContent: "space-between" }}>
+        <List.Item style={{
+          alignItems: "center"
+        }}>
+          <List.Content verticalAlign='middle'  >
+            <List.Header>   {name}  </List.Header>
+          </List.Content>
+        </List.Item>
+        <List.Item style={{
+          alignItems: "center"
+        }}>
+
+          <List.Content verticalAlign='middle'  >
+            <img src={profilePicUrl} style={{ borderRadius: "50%", height: "40px", width: "40px", ObjectFit: "cover" }} />
+          </List.Content>
+        </List.Item>
+
+      </List>
+    </>
   );
 };
 
