@@ -1,38 +1,45 @@
-import React from 'react'
-import {Menu,Container,Icon,Dropdown, GridColumn, Grid} from 'semantic-ui-react'
-import {useRouter} from 'next/router'
-import Link from 'next/link'
-import {logoutUser} from '../../utils/authUser'
+import React from "react";
+import {
+  Menu,
+  Container,
+  Icon,
+  Dropdown,
+  GridColumn,
+  Grid,
+} from "semantic-ui-react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { logoutUser } from "../../utils/authUser";
 
-function MobileHeader({  user: {
+function MobileHeader({
+  user: {
     unreadNotification,
     name,
     email,
+    _id,
     unreadMessage,
     profession,
     location,
     profilePicUrl,
-  },}  
-){
-
-     const router=useRouter()
-     const isActive = (route) => router.pathname === route;
-    return (
-    
-        <>
-      <Menu  borderless fluid secondary>
+  },
+}) {
+  const router = useRouter();
+  const isActive = (route) => router.pathname === route;
+  return (
+    <>
+      <Menu borderless fluid secondary>
         <Container text>
-        <Dropdown item icon="bars" direction="left">
+          <Dropdown item icon="bars" direction="left">
             <Dropdown.Menu>
-              <Link href={`/${email}`}>
-                <Dropdown.Item active={isActive(`/${name}`)}>
+              <Link href={`/${_id}`}>
+                <Dropdown.Item active={isActive(`/${_id}`)}>
                   <Icon name="user" size="large" />
                   Account
                 </Dropdown.Item>
               </Link>
 
               <Link href="/searchpage">
-                <Dropdown.Item active={isActive("/search")}>
+                <Dropdown.Item active={isActive("/searchpage")}>
                   <Icon name="search" size="large" />
                   Search
                 </Dropdown.Item>
@@ -44,55 +51,67 @@ function MobileHeader({  user: {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-        
-         <div  className="right floated six wide column">
-                 <div>
-                 <Grid>
-                  <Grid.Row  >
+
+          <div className="right floated six wide column">
+            <div>
+              <Grid>
+                <Grid.Row>
                   <Link href="/notifications">
-            <Menu.Item header active={isActive("/notifications") || unreadNotification}>
-              <Icon
-                name={unreadNotification ? "hand point right" : "bell outline"}
-                size="large"
-                style={{
-                  color:
-                    (unreadNotification && "orange") ||
-                    (isActive("/notifications") ? "#B23B79" : "black"),
-                }}
-              />
-            </Menu.Item>
-          </Link>
-          <Link href="/messages">
-            <Menu.Item header active={isActive("/messages") || unreadMessage}>
-              <Icon
-                name={unreadMessage ? "hand point right" : "mail outline"}
-                size="large"
-                style={{
-                  color:
-                    (unreadMessage && "orange") ||
-                    (isActive("/messages") ? "#B23B79" : "black"),
-                }}
-              />
-            </Menu.Item>
-          </Link>
+                    <Menu.Item
+                      header
+                      active={isActive("/notifications") || unreadNotification}
+                    >
+                      <Icon
+                        name={
+                          unreadNotification
+                            ? "hand point right"
+                            : "bell outline"
+                        }
+                        size="large"
+                        style={{
+                          color:
+                            (unreadNotification && "orange") ||
+                            (isActive("/notifications") ? "#B23B79" : "black"),
+                        }}
+                      />
+                    </Menu.Item>
+                  </Link>
+                  <Link href="/messages">
+                    <Menu.Item
+                      header
+                      active={isActive("/messages") || unreadMessage}
+                    >
+                      <Icon
+                        name={
+                          unreadMessage ? "hand point right" : "mail outline"
+                        }
+                        size="large"
+                        style={{
+                          color:
+                            (unreadMessage && "orange") ||
+                            (isActive("/messages") ? "#B23B79" : "black"),
+                        }}
+                      />
+                    </Menu.Item>
+                  </Link>
 
-          
-
-          <Link href="/">
-            <Menu.Item  >
-              <Icon name="home" size="large"style={{ color: isActive("/") ? "#B23B79" : "black" }} />
-            </Menu.Item>
-          </Link>
-                  </Grid.Row>
-                  </Grid>
-                 </div>
-        
-         </div>
+                  <Link href="/">
+                    <Menu.Item>
+                      <Icon
+                        name="home"
+                        size="large"
+                        style={{ color: isActive("/") ? "#B23B79" : "black" }}
+                      />
+                    </Menu.Item>
+                  </Link>
+                </Grid.Row>
+              </Grid>
+            </div>
+          </div>
         </Container>
       </Menu>
     </>
-    
-    )
-};
+  );
+}
 
-export default MobileHeader
+export default MobileHeader;

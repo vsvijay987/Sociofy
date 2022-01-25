@@ -9,9 +9,9 @@ const RightSideMenu = () => {
   useEffect(() => {
     (async () => {
       const res = await axios.get(
-        "https://newsapi.org/v2/top-headlines?country=in&apiKey=79b869b518f241b19e1a2bc89ab32693"
+        "https://inshortsapi.vercel.app/news?category=national"
       );
-      setNews(res.data.articles);
+      setNews(res.data.data);
     })();
   }, []);
 
@@ -20,21 +20,24 @@ const RightSideMenu = () => {
       {news.length > 0 ? (
         news.map((article) => (
           <Card fluid>
-            {article.urlToImage && (
-              <Image src={article.urlToImage} wrapped ui={false} />
+            <Card.Content>
+              <Card.Description style={{fontWeight:"bold"}} className="name-font">
+                {article.title && article.title}
+              </Card.Description>
+            </Card.Content>
+            {article.imageUrl && (
+              <Image src={article.imageUrl} wrapped ui={false} />
             )}
             <Card.Content>
               <Card.Meta>
-                <span className="font-link">
-                  {calculateTime(article.publishedAt)}
-                </span>
+                <span className="font-link">{article.time}</span>
               </Card.Meta>
               <Card.Description className="font-link">
-                {article.description ? article.description : article.title}
+                {article.content ? article.content : article.title}
               </Card.Description>
             </Card.Content>
             <Card.Content className="font-link" extra>
-              <a href={article.url} target="_blank">
+              <a href={article.readMoreUrl} target="_blank">
                 Show more...
               </a>
             </Card.Content>
