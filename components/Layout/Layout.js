@@ -128,7 +128,7 @@ const Layout = ({ children, user }) => {
               </Grid>
             </Ref>
             </Media>
-            <Media between={["zero", "mobile"]}>
+            <Media between={["zero", "computer"]}>
             <Ref innerRef={contextRef}>
               <Grid>
                 <Grid.Row style={{ height: "80px" }}>
