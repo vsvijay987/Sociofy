@@ -12,7 +12,7 @@ const LeftSideMenu = ({
     profession,
     location,
     profilePicUrl,
-  },
+  },pc=true
 }) => {
   const router = useRouter();
   const isActive = (route) => router.pathname === route;
@@ -64,7 +64,7 @@ const LeftSideMenu = ({
               style={{ color: isActive("/") ? "#B23B79" : "black" }}
             />
             <List.Content>
-              {
+              {pc&&
                 <List.Header
                   style={{ color: isActive("/") ? "#B23B79" : "black" }}
                   content="Home"
@@ -114,7 +114,7 @@ const LeftSideMenu = ({
               }}
             />
             <List.Content>
-              {
+              {pc &&
                 <List.Header
                   style={{ color: isActive("/messages") ? "#B23B79" : "black" }}
                   content="Messages"
@@ -167,7 +167,7 @@ const LeftSideMenu = ({
               }}
             />
             <List.Content>
-              {
+              {pc &&
                 <List.Header
                   style={{
                     color: isActive("/notifications") ? "#B23B79" : "black",
@@ -189,7 +189,7 @@ const LeftSideMenu = ({
               }}
             />
             <List.Content>
-              {
+              {pc &&
                 <List.Header
                   style={{
                     color: router.query.id === _id ? "#B23B79" : "black",

@@ -23,8 +23,10 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
     ctx.pathname === "/" ||
     ctx.pathname === "/[id]" ||
     ctx.pathname === "/post/[postId]" ||
+    ctx.pathname==="/searchpage" ||
     ctx.pathname === "/notifications" ||
     ctx.pathname === "/messages";
+
 
   if (!token) {
     protectedRoutes && redirectUser(ctx, "/login");
