@@ -4,7 +4,6 @@ import {
   Container,
   Icon,
   Dropdown,
-  GridColumn,
   Grid,
 } from "semantic-ui-react";
 import { useRouter } from "next/router";
@@ -14,13 +13,10 @@ import { logoutUser } from "../../utils/authUser";
 function MobileHeader({
   user: {
     unreadNotification,
-    name,
     email,
     _id,
     unreadMessage,
-    profession,
-    location,
-    profilePicUrl,
+    
   },
 }) {
   const router = useRouter();
@@ -29,7 +25,7 @@ function MobileHeader({
     <>
       <Menu borderless fluid secondary>
         <Container text>
-          <Dropdown item icon="bars" direction="left">
+          <Dropdown item icon="bars">
             <Dropdown.Menu>
               <Link href={`/${_id}`}>
                 <Dropdown.Item active={isActive(`/${_id}`)}>

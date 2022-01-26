@@ -139,8 +139,7 @@ const CardPost = ({ post, user, setPosts, setShowToastr, socket }) => {
           <Card.Content extra>
             <Icon
               name={isLiked ? "heart" : "heart outline"}
-              
-              style={{ cursor: "pointer", color:"#B23B79" }}
+              style={{ cursor: "pointer", color: "#B23B79" }}
               onClick={() => {
                 if (socket && socket.current) {
                   socket.current.emit("likePost", {
@@ -179,6 +178,19 @@ const CardPost = ({ post, user, setPosts, setShowToastr, socket }) => {
                 )
               }
             />
+
+            <Icon
+              name="comment outline"
+              style={{ marginLeft: "7px" }}
+              color="blue"
+            />
+            {comments.length > 0 && (
+              <span className="font-link">
+                {`${comments.length} ${
+                  comments.length === 1 ? "comment" : "comments"
+                }`}
+              </span>
+            )}
 
             {comments.length > 0 &&
               comments.map(

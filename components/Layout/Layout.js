@@ -18,7 +18,7 @@ import Navbar from "./Navbar";
 import MobileHeader  from "./MobileHeader";
 import { createMedia } from "@artsy/fresnel";
 const AppMedia = createMedia({
-  breakpoints: { zero: 0, mobile: 549, tablet: 850, computer: 1080 }
+  breakpoints: { zero: 0, mobile: 700, tablet: 750, computer: 1080 }
 });
 
 const mediaStyles = AppMedia.createMediaStyle();
