@@ -6,10 +6,12 @@ import cookie from "js-cookie";
 
 export const registerUser = async (user, setError, setLoading) => {
   try {
-    await axios.post(`${baseUrl}/api/signup`, { user });
+    let res = await axios.post(`${baseUrl}/api/signup`, { user });
+
+    return res;
 
     // setToken(res.data);
-    Router.push("/login");
+    // Router.push("/login");
   } catch (error) {
     const errorMsg = catchErrors(error);
     setError(errorMsg);

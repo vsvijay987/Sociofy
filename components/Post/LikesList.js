@@ -53,7 +53,7 @@ const LikesList = ({ postId, trigger }) => {
 
                     <List.Content>
                       <List.Header
-                        onClick={() => Router.push(`/${like.user.email}`)}
+                        onClick={() => Router.push(`/${like.user._id}`)}
                         as="a"
                         style={{fontFamily: 'Josefin Sans'}}
                         content={like.user.name}

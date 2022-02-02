@@ -1,29 +1,17 @@
 import React from "react";
-import {
-  Menu,
-  Container,
-  Icon,
-  Dropdown,
-  Grid,
-} from "semantic-ui-react";
+import { Menu, Container, Icon, Dropdown, Grid } from "semantic-ui-react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { logoutUser } from "../../utils/authUser";
 
 function MobileHeader({
-  user: {
-    unreadNotification,
-    email,
-    _id,
-    unreadMessage,
-    
-  },
+  user: { unreadNotification, email, _id, unreadMessage },
 }) {
   const router = useRouter();
   const isActive = (route) => router.pathname === route;
   return (
     <>
-      <Menu borderless fluid secondary>
+      <Menu fluid secondary>
         <Container text>
           <Dropdown item icon="bars">
             <Dropdown.Menu>
@@ -58,16 +46,12 @@ function MobileHeader({
                       active={isActive("/notifications") || unreadNotification}
                     >
                       <Icon
-                        name={
-                          unreadNotification
-                            ? "hand point right"
-                            : "bell outline"
-                        }
+                        name="bell outline"
                         size="large"
                         style={{
-                          color:
-                            (unreadNotification && "orange") ||
-                            (isActive("/notifications") ? "#B23B79" : "black"),
+                          color: isActive("/notifications")
+                            ? "#B23B79"
+                            : "black",
                         }}
                       />
                     </Menu.Item>
@@ -78,14 +62,10 @@ function MobileHeader({
                       active={isActive("/messages") || unreadMessage}
                     >
                       <Icon
-                        name={
-                          unreadMessage ? "hand point right" : "mail outline"
-                        }
+                        name="mail outline"
                         size="large"
                         style={{
-                          color:
-                            (unreadMessage && "orange") ||
-                            (isActive("/messages") ? "#B23B79" : "black"),
+                          color: isActive("/messages") ? "#B23B79" : "black",
                         }}
                       />
                     </Menu.Item>

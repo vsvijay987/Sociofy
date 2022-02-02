@@ -12,7 +12,8 @@ const LeftSideMenu = ({
     profession,
     location,
     profilePicUrl,
-  },pc=true
+  },
+  pc = true,
 }) => {
   const router = useRouter();
   const isActive = (route) => router.pathname === route;
@@ -64,23 +65,26 @@ const LeftSideMenu = ({
               style={{ color: isActive("/") ? "#B23B79" : "black" }}
             />
             <List.Content>
-              {pc&&
+              {pc && (
                 <List.Header
                   style={{ color: isActive("/") ? "#B23B79" : "black" }}
                   content="Home"
                 />
-              }
+              )}
             </List.Content>
           </List.Item>
         </Link>
         <br />
 
         <Link href="/messages">
-          <List.Item active={isActive("/messages")} style={{
+          <List.Item
+            active={isActive("/messages")}
+            style={{
               position: "relative",
               display: "block",
-            }}>
-              {unreadMessage && (
+            }}
+          >
+            {unreadMessage && (
               <span
                 style={{
                   position: "absolute",
@@ -91,8 +95,8 @@ const LeftSideMenu = ({
 
                   margin: "2px 2px",
                   borderRadius: "50%",
-                  height: "20px",
-                  width: "20px",
+                  height: "10px",
+                  width: "10px",
                   fontSize: "12px",
                   padding: "2px",
                   left: "22px",
@@ -100,9 +104,7 @@ const LeftSideMenu = ({
                   backgroundColor: "#B23B79",
                   color: "white",
                 }}
-              >
-                
-              </span>
+              ></span>
             )}
             <Icon
               name="mail outline"
@@ -114,12 +116,12 @@ const LeftSideMenu = ({
               }}
             />
             <List.Content>
-              {pc &&
+              {pc && (
                 <List.Header
                   style={{ color: isActive("/messages") ? "#B23B79" : "black" }}
                   content="Messages"
                 />
-              }
+              )}
             </List.Content>
           </List.Item>
         </Link>
@@ -143,8 +145,8 @@ const LeftSideMenu = ({
 
                   margin: "2px 2px",
                   borderRadius: "50%",
-                  height: "20px",
-                  width: "20px",
+                  height: "10px",
+                  width: "10px",
                   fontSize: "12px",
                   padding: "2px",
                   left: "22px",
@@ -152,29 +154,25 @@ const LeftSideMenu = ({
                   backgroundColor: "#B23B79",
                   color: "white",
                 }}
-              >
-                
-              </span>
+              ></span>
             )}
 
             <Icon
               name="bell outline"
               size="large"
               style={{
-                color:
-
-                  (isActive("/notifications") ? "#B23B79" : "black"),
+                color: isActive("/notifications") ? "#B23B79" : "black",
               }}
             />
             <List.Content>
-              {pc &&
+              {pc && (
                 <List.Header
                   style={{
                     color: isActive("/notifications") ? "#B23B79" : "black",
                   }}
                   content="Notifications"
                 />
-              }
+              )}
             </List.Content>
           </List.Item>
         </Link>
@@ -189,14 +187,14 @@ const LeftSideMenu = ({
               }}
             />
             <List.Content>
-              {pc &&
+              {pc && (
                 <List.Header
                   style={{
                     color: router.query.id === _id ? "#B23B79" : "black",
                   }}
                   content="Account"
                 />
-              }
+              )}
             </List.Content>
           </List.Item>
         </Link>
