@@ -12,7 +12,9 @@ import Link from "next/link";
 import Router from "next/router";
 import { registerUser } from "../utils/authUser";
 import { createMedia } from "@artsy/fresnel";
-const AppMedia = createMedia({
+import {AccCreatedToastr} from "../components/Layout/Toastr"
+
+ const AppMedia = createMedia({
   breakpoints: { zero: 0, mobile: 549, tablet: 850, computer: 1080 },
 });
 
@@ -30,11 +32,14 @@ const signup = () => {
   const { name, email, password, confirmPassword } = user;
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showToastr, setShowToastr] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [formLoading, setFormLoading] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [registerSuccess, setRegisterSuccess] = useState(false);
-
+  useEffect(() => {
+    showToastr && setTimeout(() => setShowToastr(false), 3000);
+  }, [showToastr]);
   useEffect(() => {
     const isUser = Object.values({
       name,
@@ -49,8 +54,10 @@ const signup = () => {
     e.preventDefault();
     setFormLoading(true);
     let res = await registerUser(user, setErrorMsg, setFormLoading);
-    if (res.status === 200) {
+    if (res && res.status === 200) {
       setRegisterSuccess(true);
+      setShowToastr(true);
+      
       setTimeout(() => {
         Router.push("/login");
       }, 2000);
@@ -65,6 +72,7 @@ const signup = () => {
 
   return (
     <>
+    {showToastr && <AccCreatedToastr />}
       <style>{mediaStyles}</style>
       <MediaContextProvider>
         <Media greaterThanOrEqual="computer">
@@ -417,6 +425,7 @@ const signup = () => {
             className="font-link"
             style={{ textAlign: "center", fontSize: "50px", padding: "20px" }}
           >
+            
             <p>Be Social, Go Social</p>
           </div>
         </Media>
