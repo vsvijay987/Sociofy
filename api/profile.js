@@ -21,7 +21,9 @@ router.get("/:id", authMiddleware, async (req, res) => {
       return res.status(404).send("No User Found");
     }
 
-    const profileFollowStats = await FollowerModel.findOne({ user: userProfile._id });
+    const profileFollowStats = await FollowerModel.findOne({
+      user: userProfile._id,
+    });
 
     return res.json({
       userProfile,
@@ -259,25 +261,21 @@ router.post("/settings/messagePopup", authMiddleware, async (req, res) => {
 });
 //set default image
 
-//  
+//
 router.put("/setDefault", authMiddleware, async (req, res) => {
   try {
-     
     const { userId } = req;
     const userPng =
-    "https://res.cloudinary.com/codeamphi/image/upload/v1640847269/profile-placeholder_s1biy6.png";
-  console.log("remove image id",userId)
-  const user = await UserModel.findById(req.userId);
- console.log("before remove",user)
-    
+      "https://res.cloudinary.com/codeamphi/image/upload/v1640847269/profile-placeholder_s1biy6.png";
+
+    const user = await UserModel.findById(req.userId);
 
     if (!user) {
       return res.status(404).send("User not found");
     }
     user.profilePicUrl = userPng;
     const data = await user.save();
-    console.log("after remove",data)
-
+    console.log("after remove", data);
 
     return res.status(200).send("Updated");
   } catch (error) {

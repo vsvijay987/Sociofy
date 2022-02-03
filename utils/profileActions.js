@@ -46,7 +46,14 @@ export const profileUpdate = async (
   try {
     const { name, location, profession, linkedin, twitter } = profile;
 
-    await Axios.post(`/update`, { profilePicUrl, name, location, profession, linkedin, twitter });
+    await Axios.post(`/update`, {
+      profilePicUrl,
+      name,
+      location,
+      profession,
+      linkedin,
+      twitter,
+    });
 
     setLoading(false);
     Router.reload();
@@ -81,17 +88,12 @@ export const toggleMessagePopup = async (
     alert(catchErrors(error));
   }
 };
-export const setDeafultPic = async (
-  userId
-) => {
+export const setDeafultPic = async (userId) => {
   try {
-     console.log("profile action id",userId)
-
     await Axios.put(`/setDefault`, { userId });
 
-     
     Router.reload();
   } catch (error) {
-     console.log(error)
+    console.log(error);
   }
 };

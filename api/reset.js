@@ -7,10 +7,10 @@ const crypto = require("crypto");
 const baseUrl = require("../utils/baseUrl");
 const isEmail = require("validator/lib/isEmail");
 const options = {
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.user,
-    pass: process.env.pass
+    pass: process.env.pass,
   },
 };
 
@@ -26,15 +26,12 @@ router.post("/", async (req, res) => {
     }
 
     const user = await UserModel.findOne({ email: email.toLowerCase() });
-    console.log('user: ', user);
-    
 
     if (!user) {
       return res.status(404).send("User not found");
     }
 
     const token = crypto.randomBytes(32).toString("hex");
-    console.log('token: ', token);
 
     user.resetToken = token;
     user.expireToken = Date.now() + 3600000;

@@ -453,10 +453,11 @@ function CreatePost({ user, setPosts, trigger }) {
                             backgroundColor: "#B23B79",
                             color: "white",
                             fontFamily: "Josefin Sans",
-                            height: "34px",
+                            height: "60px",
+                            width: "100px"
                           }}
                         >
-                          Choose text color
+                         Choose text color
                         </Button>
                       }
                     />
