@@ -72,3 +72,26 @@ export const MsgSentToastr = () => (
     })}
   </ToastContainer>
 );
+
+export const AccCreatedToastr = () => (
+  <ToastContainer
+    position="top-center"
+    autoClose={3000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover={false}>
+    {toast.info("account create successfully, redirecting to login page", {
+      position: "bottom-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined
+    })}
+  </ToastContainer>
+);
