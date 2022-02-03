@@ -11,7 +11,7 @@ function MobileHeader({
   const isActive = (route) => router.pathname === route;
   return (
     <>
-      <Menu fluid secondary>
+      <Menu borderless fluid secondary style={{ boxShadow: "0 1px 1px rgb(0 0 0 / 0.2)" }}>
         <Container text>
           <Dropdown item icon="bars">
             <Dropdown.Menu>

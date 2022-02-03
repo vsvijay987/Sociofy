@@ -49,7 +49,8 @@ const signup = () => {
     e.preventDefault();
     setFormLoading(true);
     let res = await registerUser(user, setErrorMsg, setFormLoading);
-    if (res.status === 200) {
+   
+    if (res && res.status === 200) {
       setRegisterSuccess(true);
       setTimeout(() => {
         Router.push("/login");
