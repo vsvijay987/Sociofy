@@ -81,3 +81,17 @@ export const toggleMessagePopup = async (
     alert(catchErrors(error));
   }
 };
+export const setDeafultPic = async (
+  userId
+) => {
+  try {
+     console.log("profile action id",userId)
+
+    await Axios.put(`/setDefault`, { userId });
+
+     
+    Router.reload();
+  } catch (error) {
+     console.log(error)
+  }
+};

@@ -257,5 +257,32 @@ router.post("/settings/messagePopup", authMiddleware, async (req, res) => {
     return res.status(500).send("Server Error");
   }
 });
+//set default image
 
+//  
+router.put("/setDefault", authMiddleware, async (req, res) => {
+  try {
+     
+    const { userId } = req;
+    const userPng =
+    "https://res.cloudinary.com/codeamphi/image/upload/v1640847269/profile-placeholder_s1biy6.png";
+  console.log("remove image id",userId)
+  const user = await UserModel.findById(req.userId);
+ console.log("before remove",user)
+    
+
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    user.profilePicUrl = userPng;
+    const data = await user.save();
+    console.log("after remove",data)
+
+
+    return res.status(200).send("Updated");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("server error");
+  }
+});
 module.exports = router;
