@@ -9,7 +9,10 @@ import {
 } from "semantic-ui-react";
 import ImageDropDiv from "../Common/ImageDropDiv";
 import uploadPic from "../../utils/uploadPicToCloudinary";
-import { profileUpdate } from "../../utils/profileActions";
+import { profileUpdate,setDeafultPic } from "../../utils/profileActions";
+ 
+const defaultPic =
+    "https://res.cloudinary.com/codeamphi/image/upload/v1640847269/profile-placeholder_s1biy6.png";
 
 const UpdateProfile = ({ UserProfile }) => {
   const inputRef = useRef();
@@ -113,6 +116,17 @@ const UpdateProfile = ({ UserProfile }) => {
             type="button"
             onClick={() => setShowSocialLinks(!showSocialLinks)}
           />
+            <br />
+          
+          {
+              defaultPic!== UserProfile.profilePicUrl &&  <Button 
+              style ={{margin:"4px 0 0 0"}}
+              color="blue"
+              onClick={ async ()=> {
+                await setDeafultPic(UserProfile._id)
+                
+              }}> Remove Pic</Button>
+             }
 
           {showSocialLinks && (
             <>
