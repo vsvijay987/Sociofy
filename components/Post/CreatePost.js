@@ -109,6 +109,7 @@ function CreatePost({ user, setPosts, trigger }) {
             onClose={() => setOpenCreateModal(false)}
             onOpen={() => setOpenCreateModal(true)}
             open={openCreateModal}
+            closeIcon
             trigger={trigger}
           >
             <Modal.Header>Create a post</Modal.Header>
