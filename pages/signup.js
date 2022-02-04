@@ -12,6 +12,7 @@ import Link from "next/link";
 import Router from "next/router";
 import { registerUser } from "../utils/authUser";
 import { createMedia } from "@artsy/fresnel";
+import {AccCreatedToastr} from "../components/Layout/Toastr"
 const AppMedia = createMedia({
   breakpoints: { zero: 0, mobile: 549, tablet: 850, computer: 1080 },
 });
@@ -31,9 +32,14 @@ const signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [showToastr, setShowToastr] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(true);
   const [registerSuccess, setRegisterSuccess] = useState(false);
+
+  useEffect(() => {
+    showToastr && setTimeout(() => setShowToastr(false), 3000);
+  }, [showToastr]);
 
   useEffect(() => {
     const isUser = Object.values({
@@ -52,6 +58,8 @@ const signup = () => {
 
     if (res && res.status === 200) {
       setRegisterSuccess(true);
+      setShowToastr(true);
+
       setTimeout(() => {
         Router.push("/login");
       }, 2000);
@@ -65,6 +73,7 @@ const signup = () => {
 
   return (
     <>
+      {showToastr && <AccCreatedToastr />}
       <style>{mediaStyles}</style>
       <MediaContextProvider>
         <Media greaterThanOrEqual="computer">
