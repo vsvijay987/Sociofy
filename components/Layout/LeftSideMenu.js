@@ -99,7 +99,7 @@ const LeftSideMenu = ({
                   width: "10px",
                   fontSize: "12px",
                   padding: "2px",
-                  left: "22px",
+                  left: "30px",
                   top: "2px",
                   backgroundColor: "#B23B79",
                   color: "white",
@@ -111,7 +111,7 @@ const LeftSideMenu = ({
               size="large"
               style={{
                 color:
-                  (unreadMessage && "orange") ||
+                  
                   (isActive("/messages") ? "#B23B79" : "black"),
               }}
             />
