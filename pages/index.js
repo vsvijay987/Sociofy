@@ -130,7 +130,7 @@ const Index = ({ user, postsData, errorLoading }) => {
       />
       <Divider />
       <div>
-        <Segment className="posts-segment">
+        <div className="posts-segment">
           {posts.length === 0 || errorLoading ? (
             <NoPosts />
           ) : (
@@ -153,7 +153,7 @@ const Index = ({ user, postsData, errorLoading }) => {
               ))}
             </InfiniteScroll>
           )}
-        </Segment>
+        </div>
       </div>
     </>
   );
