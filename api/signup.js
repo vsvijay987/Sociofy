@@ -20,8 +20,8 @@ router.post("/", async (req, res) => {
     return res.status(401).send("Password doesn't match");
   }
 
-  if (password.length < 6) {
-    return res.status(401).send("Password must be atleast 6 characters");
+  if (password.length < 5) {
+    return res.status(401).send("Password must be atleast 5 characters");
   }
 
   try {
